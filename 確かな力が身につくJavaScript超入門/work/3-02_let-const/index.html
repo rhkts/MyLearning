@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>テンプレート</title>
+</head>
+<body>
+<header>
+<div class="container">
+<h1>タイトル</h1>
+<h2>サブタイトル</h2>
+</div><!-- /.container -->
+</header>
+<main>
+<div class="container">
+<section>
+
+</section>
+</div><!-- /.container -->
+</main>
+<footer>
+<div class="container">
+<p>JavaScript Samples</p>
+
+<hr />
+<p>console は 'オウム返し'を logしなさい</p>
+<p>console.log('オウム返し')</p>
+<p>「○○は△△を××しなさい」→「○○は××しなさい」</p>
+<p>「○○は」にあたる部分をオブジェクト</p>
+<p>「××しなさい」にあたる部分をメソッド</p>
+<p>「△△」にあたる部分をパラメータ</p>
+<p>console → オブジェクト</p>
+<p>log('オウム返し') → メソッド</p>
+<p>'オウム返し' → パラメータ</p>
+<hr />
+</div><!-- /.container -->
+</footer>
+<script>
+    'use strict';
+
+    const answer = window.prompt('ヘルプを見ますか？');
+    //これは評価されない
+    // if(answer = 'no'){
+    //     window.alert('no');
+    // }
+
+    //これが正しく評価される
+    if(answer === 'yes'){
+        window.alert('タップでジャンプ、障害物をよけます。');
+    }else if(answer === 'no'){
+        window.alert('ゲーム起動中・・・');
+    }else{
+        window.alert('yesかnoでお答えください');
+    }
+
+
+
+    // console.log(answer);
+    // answer = 'no';
+
+    let answer2 = 'yes';
+    console.log(answer2);
+    answer2 = 'no';
+    console.log(answer2);
+</script>
+</body>
+</html>

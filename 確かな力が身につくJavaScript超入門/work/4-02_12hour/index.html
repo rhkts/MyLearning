@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>テンプレート</title>
+    <link href="../../_common/images/favicon.ico" rel="shortcut icon" />
+    <link
+      href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,500"
+      rel="stylesheet"
+    />
+    <link href="../../_common/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>タイトル</h1>
+        <h2>サブタイトル</h2>
+      </div>
+      <!-- /.container -->
+    </header>
+    <main>
+      <div class="container">
+        <section>
+          <p>最終アクセス日時:<span id="time"></span></p>
+          <p>最終アクセス日時(12時間表記):<span id="time2"></span></p>
+        </section>
+      </div>
+      <!-- /.container -->
+    </main>
+    <footer>
+      <div class="container">
+        <p>JavaScript Samples</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+    <script>
+      "use strict";
+
+      //初期化(インスタンスを生成)
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth();
+      const date = now.getDate();
+      const hour = now.getHours();
+      const min = now.getMinutes();
+
+      const millsec = now.getMilliseconds();
+
+      const output = `${year}/${month + 1}/${date} ${hour}:${min}:${millsec}`;
+      document.getElementById("time").textContent = output;
+
+      //オブジェクトには初期化(インスタンスを生成)するものとしないものがある
+      // 複数のオブジェクトを作れるのは初期化する
+      // 複数のオブジェクトを作れないのは初期化しない
+      // 例えば？
+      // Dateオブジェクト→複数作れる
+      // メソッド(●●しなさい！)とプロパティを持った「元のオブジェクト」が存在する
+      // このオブジェクトは使用する前に、元オブジェクトの完全なコピーを作成して、コピーしてきたオブジェクトをメモリに保存する必要がある
+      // ↑のコピー作業が、初期化(インスタンスを生成)
+      // Dateオブジェクトの元オブジェクトは1つしかないけど、オブジェクトのコピーはいくらでも作れる
+      // Dateオブジェクト(元オブジェクト) → new Date() (ここでメモリに保存) → dateオブジェクト(コピーしたオブジェクト)
+      // Dateオブジェクト(元オブジェクト) → new Date() → dateオブジェクトA 未来の日時を基準にして初期化
+      // Dateオブジェクト(元オブジェクト) → new Date() → dateオブジェクトB 現在の日時を基準にして初期化
+      // dateオブジェクトA - dateオブジェクトB = 残りの日数
+      // 複数コピーできることによって、↑のように計算に使える
+      // Mathオブジェクト→複数つくれない
+      // Mathオブジェクトはすべて読み取り専用、書き換えできないようになっていて、独自のプロパティを持つ必要がない
+
+      let ampm = "";
+      if (hour < 12) {
+        ampm = "a.m.";
+      } else {
+        ampm = "p.m.";
+      }
+      const output2 = `${year}/${month + 1}/${date} ${
+        hour % 12
+      }:${min}:${ampm}`;
+      document.getElementById("time2").textContent = output2;
+    </script>
+  </body>
+</html>

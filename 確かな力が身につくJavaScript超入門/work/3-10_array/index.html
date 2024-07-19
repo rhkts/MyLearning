@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>テンプレート</title>
+<link href="../../_common/images/favicon.ico" rel="shortcut icon">
+<link href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,500" rel="stylesheet">
+<link href="../../_common/css/style.css" rel="stylesheet">
+</head>
+<body>
+<header>
+<div class="container">
+<h1>タイトル</h1>
+<h2>サブタイトル</h2>
+</div><!-- /.container -->
+</header>
+<main>
+<div class="container">
+<section>
+    <h1>やることリスト</h1>
+    <ul id="list">
+    </ul>
+    <hr />
+    <h1>やることリスト2</h1>
+    <ul id="list2">
+        <li>サンプル</li>
+    </ul>
+    <hr />
+    <h1>やることリスト3</h1>
+    <ul id="list3">
+        <li>サンプル</li>
+    </ul>
+    <hr />
+    <h1>やることリスト4</h1>
+    <ul id="list4">
+        <li>サンプル</li>
+    </ul>
+    <hr />
+    <h1>やることリスト5</h1>
+    <ul id="list5">
+        <li>サンプル</li>
+    </ul>
+</section>
+</div><!-- /.container -->
+</main>
+<footer>
+<div class="container">
+<p>JavaScript Samples</p>
+</div><!-- /.container -->
+</footer>
+<script>
+    'use strict';
+
+    let todo = ['デザインカンプ作成','データ整理', '勉強会申込', '牛乳買う'];
+
+    console.log('----------')
+    console.log('デザインカンプ作成','データ整理', '勉強会申込', '牛乳買う')
+    console.log('push: 配列の最後にデータを追加する');
+    todo.push('歯医者に行く');
+
+    for(let item of todo){
+        console.log(item);
+    }
+
+    console.log('----------')
+    console.log('pop: 配列の最後のデータを削除する');
+    // 初期化
+    todo = ['デザインカンプ作成','データ整理', '勉強会申込', '牛乳買う'];
+    todo.pop();
+    for(let item of todo){
+        console.log(item);
+    }
+
+    console.log('----------')
+    console.log('shift: 配列の最初のデータを削除する');
+    // 初期化
+    todo = ['デザインカンプ作成','データ整理', '勉強会申込', '牛乳買う'];
+    todo.shift();
+    for(let item of todo){
+        console.log(item);
+    }
+
+    console.log('----------')
+    console.log('unshift: 配列の最初に引数1,引数2...を追加する');
+    // 初期化
+    todo = ['デザインカンプ作成','データ整理', '勉強会申込', '牛乳買う'];
+    todo.unshift('追加1','追加2');
+    for(let item of todo){
+        console.log(item);
+    }
+
+    console.log('----------')
+    // 初期化
+    todo = ['デザインカンプ作成','データ整理', '勉強会申込', '牛乳買う'];
+    todo.push('歯医者に行く');
+    for(let item of todo){
+        const li = `<li>${item}</li>`;
+        // 取得した要素.insertAdjacentHTML('挿入する場所',挿入する要素)
+        document.getElementById('list').insertAdjacentHTML('beforeend',li);
+    }
+
+    // 初期化
+    todo = ['デザインカンプ作成','データ整理', '勉強会申込', '牛乳買う'];
+    todo.push('歯医者に行く');
+    for(let item of todo){
+        const li = `<li>${item}</li>`;
+        // 取得した要素.insertAdjacentHTML('挿入する場所',挿入する要素)
+        document.getElementById('list2').insertAdjacentHTML('beforebegin',li);
+    }
+
+    // 初期化
+    todo = ['デザインカンプ作成','データ整理', '勉強会申込', '牛乳買う'];
+    todo.push('歯医者に行く');
+    for(let item of todo){
+        const li = `<li>${item}</li>`;
+        // 取得した要素.insertAdjacentHTML('挿入する場所',挿入する要素)
+        document.getElementById('list3').insertAdjacentHTML('afterbegin',li);
+    }
+
+    // 初期化
+    todo = ['デザインカンプ作成','データ整理', '勉強会申込', '牛乳買う'];
+    todo.push('歯医者に行く');
+    for(let item of todo){
+        const li = `<li>${item}</li>`;
+        // 取得した要素.insertAdjacentHTML('挿入する場所',挿入する要素)
+        document.getElementById('list4').insertAdjacentHTML('beforeend',li);
+    }
+
+    // 初期化
+    todo = ['デザインカンプ作成','データ整理', '勉強会申込', '牛乳買う'];
+    todo.push('歯医者に行く');
+    for(let item of todo){
+        const li = `<li>${item}</li>`;
+        // 取得した要素.insertAdjacentHTML('挿入する場所',挿入する要素)
+        document.getElementById('list5').insertAdjacentHTML('afterend',li);
+    }
+</script>
+</body>
+</html>
