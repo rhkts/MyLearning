@@ -3,15 +3,30 @@
 const lang = document.querySelector("html").lang;
 
 //ifを使った例
-if (lang === "ja") {
-  //ここでHTMLの<html></html>を取得
-  //CSSでいうとタイプセレクタ
-  //<option></option>タグのうち、value属性が、"index.html"であるものがマッチする→<option value="index.html">日本語</option>
-  document.querySelector('option[value="index.html"').selected = true;
-} else if (lang === "en") {
-  document.querySelector('option[value="index-en.html"').selected = true;
-} else if (lang === "zh") {
-  document.querySelector('option[value="index-zh.html"').selected = true;
+// if (lang === "ja") {
+//   //ここでHTMLの<html></html>を取得
+//   //CSSでいうとタイプセレクタ
+//   //<option></option>タグのうち、value属性が、"index.html"であるものがマッチする→<option value="index.html">日本語</option>
+//   document.querySelector('option[value="index.html"').selected = true;
+// } else if (lang === "en") {
+//   document.querySelector('option[value="index-en.html"').selected = true;
+// } else if (lang === "zh") {
+//   document.querySelector('option[value="index-zh.html"').selected = true;
+// }
+
+//switchを使った例
+switch (lang) {
+  case "ja":
+    document.querySelector('option[value="index.html"').selected = true;
+    break;
+  case "en":
+    document.querySelector('option[value="index-en.html"').selected = true;
+    break;
+  case "zh":
+    document.querySelector('option[value="index-zh.html"').selected = true;
+    break;
+  default:
+    alert("どれでもないよ！");
 }
 
 //onChangeイベントが発生するのは、今と違う<option></option>が選択されあた時だけ。
