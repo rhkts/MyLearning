@@ -6,3 +6,4 @@
 確かな力が身につくJavaScript超入門/work/_template
 // 画像はコミットしない
 *.jpg
+*.svg
