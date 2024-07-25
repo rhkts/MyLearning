@@ -9,3 +9,5 @@
 *.svg
 //_commonはコミットしない
 _common
+//.txtファイルはコミットしない
+*.txt
