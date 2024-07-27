@@ -1,7 +1,8 @@
-// サンプルコードとzipはコミットしない
+// サンプルコードはコミットしない
 確かな力が身につくJavaScript超入門/book-js
 確かな力が身につくJavaScript超入門/Served-win32-x64
 確かな力が身につくJavaScript超入門/work/_template
+現場で使えるTypeScript詳解実践ガイド/ts-practice
 // 画像はコミットしない
 *.jpg
 *.svg
