@@ -13,4 +13,14 @@ type Animal = Cat | Dog; //Animalエイリアスに、Cat型とDog型を指定
 type Cat = "mike" | "dora" | "pug";
 type Dog = "shiba" | "poodle" | "pug";
 
-let pet: Animal = "shiba"; //
+let pet: Animal = "shiba";
+
+type Pc = Windows | Mac;
+
+type Windows = "note" | "desktop";
+type Mac = "MackBook" | "iMac" | "Mac Stuio";
+
+let myPc: Pc = "desktop";
+
+type Pc2 = Pc | "jisaku";
+let yourPc: Pc2 = "jisaku";
