@@ -10,10 +10,8 @@ console.log(value3_39_1 + 3); //unknown型は算術演算が許可されてい�
 //3-41 unknown型の変数を他の型へ特定
 let value3_39_3: unknown = 10; //unknown型
 if (typeof value3_39_3 === "number") {
-    console.log(value3_39_3 + 3); //OK
+  console.log(value3_39_3 + 3); //OK
 }
-
-
 
 // -- zenn --
 //## unknown型
@@ -32,12 +30,12 @@ let sumValue2 = unknownValue1 * 5;
 //'unknownValue1''は 'unknown' 型です。
 
 //`unknown`型の変数の操作は限られているが、比較演算子は許可されている。(`==`,`!=`,`===`,`!==`,`>`,`<`,`>=`,`<=`,)
-let unknownValue4: unknown = 'a';
-let unknownValue5: unknown = 'a';
+let unknownValue4: unknown = "a";
+let unknownValue5: unknown = "a";
 if (unknownValue4 === unknownValue5) {
-    console.log('OK');
+  console.log("OK");
 } else {
-    console.log('NG');
+  console.log("NG");
 }
 
 //`unknown`型の変数が「一体何の型なのか」を確認し、確認がとれたらその変数を`確認した型`として扱うことができる。
