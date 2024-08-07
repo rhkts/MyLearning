@@ -19,7 +19,6 @@ function addNumbers(a: number, b: number): number {
     return a.toString() + b.toString();
 }
 
-
 //3-47 オプショナルパラメータ
 function printMessage(message?: string) {
     if (message) {
@@ -29,7 +28,18 @@ function printMessage(message?: string) {
     }
 }
 
-printMessage("Hello World");
+//3-48 関数型の構文
+let myFunction: (arg1: number, arg2: string) => boolean;
+
+
+//3-49 関数式と関数型
+let addNumbers: (a: number, b: number) => number = (a, b) => a + b;
+
+//3-50 関数型と型エイリアス
+type AddFunction = (a: number, b: number) => number;
+const addNumbers: AddFunction =
+
+    printMessage("Hello World");
 printMessage();
 // -- zenn --
 //## 関数と型
@@ -90,4 +100,31 @@ function alertMessage(caller: string, message1?: string, message2?: string) {
     } else {
         alert(`${caller}さん: 「No message」`);
     }
-}  
+}
+
+//### 関数型
+//次の例では、変数`sampleFunction`に関数型を指定している
+//`sampleFunction`は`number`型の`hikisu1`と`string`型のhikisu2`を受け取り、
+//`boolean`型の値を返却する関数型となる。
+let sampleFunction: (hikisu1: number, hikisu2: number) => boolean;
+
+//変数の型として、関数型を指定しその変数にアロー関数を代入する場合は・・・
+const arrowVariable: (hikisu1: number, hikisu2: number) => number = (a, b) => a + b;
+//分解してみる
+//1. 関数型の定義
+//「`hikisu1`と`hikisu2`はどちらも`number`型であり、戻り値も`number`型である」ということを示す。
+(hikisu1: number, hikisu2: number) => number
+    //2. アロー関数
+    (a, b) => a + b
+//「引数に`a`と`b`を受け取り、それを足し算して戻り値として返却する」ということを示す。
+//3. 変数`arrowVariable`の定義
+const arrowVariable: (hikisu1: number, hikisu2: number) => number = (hikisu1, hikisu2) => hikisu1 + hikisu2;
+//変数`arrowVariable`に`1. 関数型の定義`で定義した型と一致するアロー関数を代入する。
+//`arrowVariable`は、`number`型の２つの引数`hikisu1`と`hikisu2`を受け取り、その合計を`number`型として返す関数になる。
+
+//このコードを読みやすくするには、型エイリアスを使用するとよい。
+type SampleArrowFunction = (hikisu1: number, hikisu2: number) => number;
+const sampleAddNumbers: SampleArrowFunction = (a, b) => a + b;
+const sampleKakezanNumbers: SampleArrowFunction = (a, b) => a * b;
+console.log(sampleAddNumbers(1, 3)); //--> 4
+console.log(sampleKakezanNumbers(3, 3)); //--> 9
