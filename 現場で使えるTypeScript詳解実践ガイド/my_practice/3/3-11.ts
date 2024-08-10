@@ -170,9 +170,8 @@ const returnStringFunction: VoidFunctionType = () => {
     return "文字列！"
 }
 
-const okResutl = returnStringFunction();
-console.log(typeof (okResutl));
+const okResult = returnStringFunction(); //void型
 
-// voidの関数型を指定すると、たとえ戻り値があったとしてもvoid型になることは理解できました。
-// しかし、次のようなコードを実行すると`string`となります。
-// 私の予想では`void`となると考えていましたが、この結果になったのはなぜですか？
+//`okResult`をstring型のように扱おうとするとエラーになる
+console.log(okResult.toUpperCase());
+//プロパティ 'toUpperCase' は型 'void' に存在しません。
