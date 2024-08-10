@@ -37,10 +37,27 @@ let addNumbers: (a: number, b: number) => number = (a, b) => a + b;
 
 //3-50 関数型と型エイリアス
 type AddFunction = (a: number, b: number) => number;
-const addNumbers: AddFunction =
+const addNumbers: AddFunction = (a, b) => a + b;
 
-    printMessage("Hello World");
-printMessage();
+//3-51 void型の指定
+function greet(): void {
+    console.log("hello");
+}
+
+//3-52 関数型の戻り値の値がvoid型の場合
+type ReturnVoid = () => void;
+
+// OK 実際にはstringの型を消す関数の代入
+const greetWorld: ReturnVoid = () => {
+    return "Hello World";
+}
+
+//resultの型はvoidとして扱われ、関数の戻り値の型情報は無視される
+const result = greetWorld(); //void型
+
+// NG TypeScriptはresultの型をvoidとしてみなしているため、string型のメソッドは使えない
+console.log(result.toUpperCase());
+
 // -- zenn --
 //## 関数と型
 //TypeScriptでは型推論の機能があるので、「関数でも型推論してくれるだろう」という感覚で関数`addNumber`を定義。
@@ -126,5 +143,36 @@ const arrowVariable: (hikisu1: number, hikisu2: number) => number = (hikisu1, hi
 type SampleArrowFunction = (hikisu1: number, hikisu2: number) => number;
 const sampleAddNumbers: SampleArrowFunction = (a, b) => a + b;
 const sampleKakezanNumbers: SampleArrowFunction = (a, b) => a * b;
+const sampleDivisionNumbers: SampleArrowFunction = (c, d) => c / d;
 console.log(sampleAddNumbers(1, 3)); //--> 4
 console.log(sampleKakezanNumbers(3, 3)); //--> 9
+console.log(sampleDivisionNumbers(sampleKakezanNumbers(3, 3), 3)) // --> 3
+
+//### void型
+//戻り値が存在しないことを示すために使用される型。
+function voidFunctionSample(): void {
+    console.log('戻り値なし！');
+}
+voidFunctionSample(); //--> 戻り値なし！
+
+//`void`型を指定した関数で`return`しようとするとエラー。
+function voidFunctionWithReturn(): void {
+    console.log('戻り値なし！');
+    return 'これはエラーの関数'
+}
+//型 'string' を型 'void' に割り当てることはできません。
+
+//`void`を指定した関数の変数に、値を返却する関数を代入すると戻り値の型情報は無視される。
+//戻り値voidの関数型
+type VoidFunctionType = () => void;
+
+const returnStringFunction: VoidFunctionType = () => {
+    return "文字列！"
+}
+
+const okResutl = returnStringFunction();
+console.log(typeof (okResutl));
+
+// voidの関数型を指定すると、たとえ戻り値があったとしてもvoid型になることは理解できました。
+// しかし、次のようなコードを実行すると`string`となります。
+// 私の予想では`void`となると考えていましたが、この結果になったのはなぜですか？
