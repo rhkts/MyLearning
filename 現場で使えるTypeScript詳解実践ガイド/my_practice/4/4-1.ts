@@ -44,7 +44,7 @@ interface PetWithMethod {
   cry(word: string): void;
   favorite(word: string): void;
   //オプショナルプロパティ
-  hair_color?: string;
+  seibetsu?: string;
   readonly coat: string;
 }
 
@@ -57,7 +57,7 @@ const tama: PetWithMethod = {
   favorite(word) {
     console.log(word);
   },
-  //hair_color は省略
+  //seibetsu は省略
   coat: "茶色",
 };
 
