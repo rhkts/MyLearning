@@ -12,3 +12,7 @@ _common
 *.txt
 //.zipはコミットしない
 *.zip
+//.vsフォルダはコミットしない
+C#\MarkdownViewerWith.NETFramewrk\.vs
+//Debugフォルダ以下はコミットしない
+C#\MarkdownViewerWith.NETFramewrk\MarkdownViewerWith.NETFramewrk\bin\Debug
