@@ -36,25 +36,27 @@
 //### メソッドの追加
 //`Person`クラスに`greet`メソッドを追加。
 //`greet`メソッドはstring型のパラメータを持ち、戻り値なし、consoleを出力するメソッド。
-// class Person {
-//     name: string;
-//     age: number;
+class Person {
+  name: string;
+  age: number;
 
-//     constructor(name: string, age: number) {
-//         this.name = name;
-//         this.age = age;
-//     }
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
 
-//     greet(greeting: string): void {
-//         console.log(`${greeting} 私の名前は ${this.name} 、年齢は ${this.age}です。`);
-//     }
-// }
+  greet(greeting: string): void {
+    console.log(
+      `${greeting} 私の名前は ${this.name} 、年齢は ${this.age}です。`
+    );
+  }
+}
 
-//const taro = new Person("テスト　太郎", 20);
-//`greet`メソッドの呼び出し
-//taro.greet("こんにちは！");
+const taro = new Person("テスト　太郎", 20);
+// `greet`メソッドの呼び出し
+taro.greet("こんにちは！");
 
-//`greet`メソッドを引数無しで呼び出したり、違う型を引数として渡すとエラーとなる。
+// `greet`メソッドを引数無しで呼び出したり、違う型を引数として渡すとエラーとなる。
 //taro.greet(); //1 個の引数が必要ですが、0 個指定されました。
 //taro.greet(["こんにちは！"]); //型 'string[]' の引数を型 'string' のパラメーターに割り当てることはできません。
 
