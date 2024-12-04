@@ -14,6 +14,7 @@
 //クラスのメンバーはトップクラスで明示的に宣言する必要がある。
 //プロパティを宣言せずに、コンストラクタ内でプロパティを初期化しようとするとエラーになる。
 // class errorPerson {
+//ここ(トップクラス)name,ageを宣言していない
 //     constructor(name: string, age: number) {
 //         this.name = name; //プロパティ 'name' は型 'errorPerson' に存在しません。
 //         this.age = age; //プロパティ 'age' は型 'errorPerson' に存在しません。
