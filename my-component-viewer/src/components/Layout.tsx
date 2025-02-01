@@ -1,9 +1,9 @@
-// src/components/Layout.tsx
 import { useState } from "react";
 import TailwindCard from "./TailwindCSS/TailwindCard";
 import TailwindButton from "./TailwindCSS/TailwindButton";
 import TailwindDialog from "./mui/MuiDialog";
 import MuiButton from "./mui/MuiButton";
+import MuiDataGridwithUTF8Export from "./mui/MuiDataGridwithUTF8Export";
 
 type ComponentType = {
   id: string;
@@ -11,9 +11,14 @@ type ComponentType = {
   component: JSX.Element;
 };
 
-// 仮のコンポーネントリスト
+// コンポーネントリスト
 const components: ComponentType[] = [
   { id: "MuiButton", name: "MuiButton", component: <MuiButton /> },
+  {
+    id: "MuiDataGridwithUTF8Export",
+    name: "MuiDataGridwithUTF8Export",
+    component: <MuiDataGridwithUTF8Export />,
+  },
   {
     id: "TailwindDialog",
     name: "TailwindDialog",
