@@ -1,11 +1,30 @@
 // src/components/Layout.tsx
 import { useState } from "react";
+import TailwindCard from "./TailwindCSS/TailwindCard";
+import TailwindButton from "./TailwindCSS/TailwindButton";
+import TailwindDialog from "./mui/MuiDialog";
+import MuiButton from "./mui/MuiButton";
+
+type ComponentType = {
+  id: string;
+  name: string;
+  component: JSX.Element;
+};
 
 // 仮のコンポーネントリスト
-const components = [
-  { id: "button", name: "Button" },
-  { id: "card", name: "Card" },
-  { id: "dialog", name: "Dialog" },
+const components: ComponentType[] = [
+  { id: "MuiButton", name: "MuiButton", component: <MuiButton /> },
+  {
+    id: "TailwindDialog",
+    name: "TailwindDialog",
+    component: <TailwindDialog />,
+  },
+  {
+    id: "Tailwindbutton",
+    name: "TailwindButton",
+    component: <TailwindButton />,
+  },
+  { id: "TailwindCard", name: "TailwindCard", component: <TailwindCard /> },
 ];
 
 export default function Layout() {
@@ -42,10 +61,18 @@ export default function Layout() {
           {selectedComponent ? (
             <div className="p-4 border rounded bg-white shadow">
               <h2 className="text-xl font-semibold mb-2">
-                {components.find((c) => c.id === selectedComponent)?.name}
+                {
+                  components.find(
+                    (component) => component.id === selectedComponent
+                  )?.name
+                }
               </h2>
               <p className="text-gray-600">
-                ここに {selectedComponent} のデモを表示
+                {
+                  components.find(
+                    (component) => component.id === selectedComponent
+                  )?.component
+                }
               </p>
             </div>
           ) : (
