@@ -4,3 +4,7 @@ export type ComponentType = {
   component: JSX.Element;
   path: string;
 };
+
+export type CodeViewerPorps = {
+  code: string;
+};

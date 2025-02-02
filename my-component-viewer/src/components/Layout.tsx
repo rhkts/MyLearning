@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import * as Mui from "./mui";
 import * as TailwindCss from "./TailwindCSS";
 import { ComponentType } from "./type";
+import CodeViewer from "./CodeViewer";
 
 // 各種コンポーネントのtsxファイルを取得
 const codeFiles = import.meta.glob("../components/**/*.{tsx,ts}", {
@@ -130,7 +131,7 @@ export default function Layout() {
                 ? components.find(
                     (component) => component.id === selectedComponent
                   )?.component
-                : sourceCode && <>{sourceCode}</>}
+                : sourceCode && <CodeViewer code={sourceCode} />}
             </div>
           ) : (
             <p className="text-gray-500">
