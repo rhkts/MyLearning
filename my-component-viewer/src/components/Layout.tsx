@@ -1,10 +1,6 @@
 import { useState } from "react";
-import TailwindCard from "./TailwindCSS/TailwindCard";
-import TailwindButton from "./TailwindCSS/TailwindButton";
-import TailwindDialog from "./mui/MuiDialog";
-import MuiButton from "./mui/MuiButton";
-import MuiDataGridwithUTF8Export from "./mui/MuiDataGridwithUTF8Export";
-
+import * as Mui from "./mui";
+import * as TailwindCss from "./TailwindCSS";
 type ComponentType = {
   id: string;
   name: string;
@@ -13,23 +9,27 @@ type ComponentType = {
 
 // コンポーネントリスト
 const components: ComponentType[] = [
-  { id: "MuiButton", name: "MuiButton", component: <MuiButton /> },
+  { id: "MuiButton", name: "MuiButton", component: <Mui.MuiButton /> },
   {
     id: "MuiDataGridwithUTF8Export",
     name: "MuiDataGridwithUTF8Export",
-    component: <MuiDataGridwithUTF8Export />,
+    component: <Mui.MuiDataGridwithUTF8Export />,
   },
   {
-    id: "TailwindDialog",
-    name: "TailwindDialog",
-    component: <TailwindDialog />,
+    id: "MuiDialog",
+    name: "MuiDialog",
+    component: <Mui.MuiDialog />,
   },
   {
     id: "Tailwindbutton",
     name: "TailwindButton",
-    component: <TailwindButton />,
+    component: <TailwindCss.TailwindButton />,
   },
-  { id: "TailwindCard", name: "TailwindCard", component: <TailwindCard /> },
+  {
+    id: "TailwindCard",
+    name: "TailwindCard",
+    component: <TailwindCss.TailwindCard />,
+  },
 ];
 
 export default function Layout() {
