@@ -10,7 +10,7 @@ import {
 const MuiDialog = () => {
   const [open, setOpen] = useState<boolean>(false);
   return (
-    <div>
+    <>
       <Button variant="contained" onClick={() => setOpen(true)}>
         ダイアログを開く
       </Button>
@@ -22,7 +22,7 @@ const MuiDialog = () => {
           <Button onClick={() => setOpen(false)}>ダイアログを閉じる</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 
