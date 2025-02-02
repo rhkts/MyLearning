@@ -1,12 +1,6 @@
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef, GridToolbarExport } from "@mui/x-data-grid";
-
-type rowType = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  age: number;
-};
+import { rowType } from "./types";
 
 const columuns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 90 },

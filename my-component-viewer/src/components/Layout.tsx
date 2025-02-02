@@ -1,11 +1,7 @@
 import { useState } from "react";
 import * as Mui from "./mui";
 import * as TailwindCss from "./TailwindCSS";
-type ComponentType = {
-  id: string;
-  name: string;
-  component: JSX.Element;
-};
+import { ComponentType } from "./type";
 
 // コンポーネントリスト
 const components: ComponentType[] = [
