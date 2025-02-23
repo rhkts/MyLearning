@@ -71,7 +71,7 @@ export default function Layout() {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-800 text-white p-4">
+      <aside className="w-64 bg-gray-800 text-white p-4 h-full overflow-auto">
         <h2 className="text-xl font-bold mb-4">コンポーネント一覧</h2>
         <ul>
           {components.map((component) => (
@@ -91,7 +91,7 @@ export default function Layout() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-6 h-full overflow-auto">
         <h1 className="text-2xl font-bold">コンポーネントのデモ</h1>
         <div className="mt-4">
           {selectedComponent ? (
