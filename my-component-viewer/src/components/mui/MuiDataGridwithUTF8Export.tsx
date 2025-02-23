@@ -34,9 +34,9 @@ const columuns: GridColDef[] = [
 ];
 
 const rows: rowType[] = [
-  { id: 1, firstName: "Taro", lastName: "テスト太郎", age: 35 },
-  { id: 2, firstName: "Jiro", lastName: "テスト次郎", age: 42 },
-  { id: 3, firstName: "Saburo", lastName: "テスト三郎", age: 45 },
+  { id: 1, firstName: "太郎", lastName: "テスト", age: 35 },
+  { id: 2, firstName: "次郎", lastName: "テスト", age: 42 },
+  { id: 3, firstName: "三郎", lastName: "テスト", age: 45 },
 ];
 
 function CustomToolbar() {
