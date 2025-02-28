@@ -12,6 +12,7 @@ const SummerTime = () => {
 
   return (
     <>
+      <TextField defaultValue={"まだ途中"} fullWidth />
       <TextField defaultValue={"現在日時"} disabled={true} fullWidth />
       <TextField defaultValue={new Date(dateValue)} disabled={true} fullWidth />
       <TextField defaultValue={"サマータイム"} disabled={true} fullWidth />
