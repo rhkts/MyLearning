@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Mui from "./mui";
 import * as TailwindCss from "./TailwindCSS";
+import * as Tools from "./Tools";
 import { ComponentType } from "./type";
 import CodeViewer from "./CodeViewer";
 
@@ -41,6 +42,12 @@ const components: ComponentType[] = [
     name: "TailwindCard",
     component: <TailwindCss.TailwindCard />,
     path: "./TailwindCSS/TailwindCard.tsx",
+  },
+  {
+    id: "SummerTime",
+    name: "SummerTime",
+    component: <Tools.SummerTime />,
+    path: "./Tools/SummerTime.tsx",
   },
 ];
 
