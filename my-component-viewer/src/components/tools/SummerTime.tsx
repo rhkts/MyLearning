@@ -10,6 +10,9 @@ const SummerTime = () => {
     setDateValue(event.target.value);
   };
 
+  //memo
+  //タイムゾーン付き文字列で初期化したパターンの検証を行う
+
   return (
     <>
       <TextField defaultValue={"まだ途中"} fullWidth />
