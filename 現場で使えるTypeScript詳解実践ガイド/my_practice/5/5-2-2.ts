@@ -4,7 +4,7 @@
 //関数の入力パラメータと戻り値を定義し、その関数構造を方として表現することです。
 //基本的な構文
 //```ts
-let sampleFunction: (hikisu1: string, hikisu2: number) => boolean;
+// let sampleFunction: (hikisu1: string, hikisu2: number) => boolean;
 //```
 //`sampleFunction`は「string型の引数`hikisu1`とnumber型の`hikisu2`を受け取り、boolean型の値を返却する関数」となります。
 
@@ -12,8 +12,8 @@ let sampleFunction: (hikisu1: string, hikisu2: number) => boolean;
 //関数型の変数`function1`と`function2`を用意(引数は指定しない)。
 //それぞれ異なるオブジェクトを戻り値とする関数を代入します。
 //```ts
-let function1 = () => ({ name: "太郎" });
-let function2 = () => ({ name: "次郎", age: 20 });
+// let function1 = () => ({ name: "太郎" });
+// let function2 = () => ({ name: "次郎", age: 20 });
 //```
 //`function1`は`name`プロパティだけを持つオブジェクト、`function2`は`name`プロパティと`age`プロパティを持つオブジェクトを返却します。
 
@@ -21,8 +21,8 @@ let function2 = () => ({ name: "次郎", age: 20 });
 
 //#### 互換性アリ
 //```ts
-function1 = function2;
-console.log(function1());
+// function1 = function2;
+// console.log(function1());
 // →{ name: '次郎', age: 20 }
 //`function2`の戻り値のオブジェクト型は`function1`の戻り値のオブジェクト型に必要なプロパティ`name`を保持しています。
 //そのため、**`fucntion2`の戻り値の方は`function1`の戻り値のオブジェクトのサブタイプ**となり、型の互換性の条件を満たすため`function1`にfunction2`を代入することができます。
@@ -39,3 +39,49 @@ console.log(function1());
 //`function2`の戻り値のオブジェクト型は`name`と`age`の2種類のプロパティを保持しています。
 //しかし、`function1`の戻り値のオブジェクト型は`name`プロパティだけを保持しているため、`function2`の戻り値に必要な`age`プロパティが不足しています。
 //そのため安全に型を置き換えることができないため**互換性がない**とみなされてエラーとなります。
+
+interface Person {
+  name: string;
+  age: number;
+}
+
+//インターフェイスの拡張によって、自動的にStudentはPersonのサブタイプになる。
+interface Teacher extends Person {
+  subject: string;
+}
+
+let function3 = (person: Person) => {
+  console.log("---- function3 ----");
+  console.log(`名前:${person.name}`);
+  console.log(`年齢:${person.age}`);
+};
+
+let function4 = (teacher: Teacher) => {
+  console.log("---- function4 ----");
+  console.log(`名前:${teacher.name}`);
+  console.log(`年齢:${teacher.age}`);
+  console.log(`部活:${teacher.subject}`);
+};
+
+const personTestData: Person = { name: "テスト太郎", age: 20 };
+const teacherTestData: Teacher = {
+  name: "先生 太郎",
+  age: 20,
+  subject: "国語",
+};
+
+// function3 = function4;
+
+function4 = function3;
+
+// function3(personTestData);
+
+// function3(teacherTestData);
+// function4(personTestData);
+// function4(studentTestData);
+
+// function3 = function4;
+
+// function4 = function3;
+
+// function4(studentTestData);
