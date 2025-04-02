@@ -33,4 +33,4 @@ function fn2() {
 }
 
 const list = fn2(); //(number | string)[]として扱われる
-list.push(true); //型 'boolean' の引数を型 'string | number' のパラメーターに割り当てることはできません。
+//list.push(true); //型 'boolean' の引数を型 'string | number' のパラメーターに割り当てることはできません。
