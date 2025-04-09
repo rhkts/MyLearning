@@ -21,6 +21,10 @@ const elementA = document.querySelector(".someClass");
 //型アサーションによる型の変更
 const elementB = document.querySelector(".someClass") as HTMLInputElement;
 
+const elementC = document.querySelector<HTMLInputElement>(".someClass");
+
+const elementD = document.getElementById(".someId") as HTMLInputElement;
+
 //非アサーション
 function fetchData() {
   const resultData = Math.random() > 0.5 ? "結果だよ！" : null;
