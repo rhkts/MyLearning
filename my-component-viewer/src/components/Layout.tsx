@@ -44,6 +44,12 @@ const components: ComponentType[] = [
     path: "./TailwindCSS/TailwindCard.tsx",
   },
   {
+    id: "ApiWrapper",
+    name: "ApiWrapper",
+    component: <Tools.ApiWrapper />,
+    path: "./Tools/ApiWrapper.tsx",
+  },
+  {
     id: "SummerTime",
     name: "SummerTime",
     component: <Tools.SummerTime />,
