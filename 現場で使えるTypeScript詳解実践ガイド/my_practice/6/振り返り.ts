@@ -1,33 +1,39 @@
-interface Book {
-  title: string;
-  author: string;
-  year: number;
+class LimitedStorage<T extends string | number> {
+  private items: T[] = [];
+
+  add(item: T): void {
+    this.items.push(item);
+  }
+
+  getAll(): T[] {
+    return [...this.items];
+  }
 }
 
-function updateBook(book: Book, update: Partial<Book>): Book {
-  return { ...book, ...update };
-}
-
-type StatusType = "success" | "error" | "loading";
-
-let statusMessages: Record<StatusType, string>;
-
-statusMessages = {
-  success: "操作が完了しました",
-  error: "エラーが発生しました",
-  loading: "読み込み中です",
-};
-
-interface Product {
+type Product = {
   id: number;
   name: string;
-  description: string;
   price: number;
-}
-
-type SimpleProduct = Pick<Product, "id" | "name">;
-
-const productInfo: SimpleProduct = {
-  id: 1,
-  name: "aaa",
 };
+
+function getProp<T, K extends keyof T>(item: T, key: K) {
+  return item[key];
+}
+const item: Product = {
+  id: 1,
+  name: "Keyboard",
+  price: 3000,
+};
+
+const result = getProp(item, "name");
+
+function average<T extends number[]>(values: T): number {
+  // let result = 0;
+  // values.forEach((value) => (result += value));
+  // result = result / values.length;
+  // return result;
+
+  const sum = values.reduce((acc, val) => acc + val, 0);
+
+  return sum / values.length;
+}
