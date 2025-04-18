@@ -61,3 +61,18 @@ console.log(jsonData);
 コンソールの結果と JSON ファイルの内容が一致していますね。  
 これで JOSN ファイルから直接データをインポートできるようになりました。  
 型に関しては TypeScript によって、自動補完されます。
+
+### ついでに
+
+他の方法として、Node.js の fs モジュールを使用するという方法があります。
+
+```ts
+import fs from "fs";
+
+const fsData = fs.readFileSync("../jsonData.json", "utf-8");
+
+const data = JSON.parse(fsData); //戻り値はany型
+```
+
+この場合はファイルの内容はすべて文字列として取り込まれます。
+そこで、`JSON.parse`関数を利用してオブジェクトに変換する必要が出てきますが、`JSON.parse`の戻り値は`any`型となり、TypeScript による型チェックを受けることができないので注意してください。
