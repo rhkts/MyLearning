@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const question_test_json_1 = __importDefault(require("./data/question.test.json"));
 const promises_1 = __importDefault(require("readline/promises"));
+const chalk_1 = __importDefault(require("chalk"));
 console.log("Game Start!");
 class Quiz {
     questions;
@@ -45,7 +46,7 @@ const CLI = {
         console.clear();
     },
     destroy() {
-        console.log("終了します");
+        console.log(chalk_1.default.green("終了します"));
         rl.close();
     },
 };

@@ -1,5 +1,6 @@
 import rawData from "./data/question.test.json";
 import readlinePromise from "readline/promises";
+import chalk from "chalk";
 
 console.log("Game Start!");
 
@@ -63,7 +64,7 @@ const CLI: UserIntarfase = {
     console.clear();
   },
   destroy() {
-    console.log("終了します");
+    console.log(chalk.green("終了します"));
     rl.close();
   },
 };
