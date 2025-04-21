@@ -13,9 +13,11 @@ interface UserIntarfase {
   input(): Promise<string>;
   clear(): void;
   destroy(): void;
-  // output(message: string, color?: Color): void;
+  output(message: string, color?: Color): void;
   // outputAnswer(message: string): void;
 }
+
+type Color = "red" | "green" | "yellow" | "white";
 
 class Quiz {
   questions: Question[];
@@ -63,9 +65,14 @@ const CLI: UserIntarfase = {
   clear() {
     console.clear();
   },
+
   destroy() {
     console.log(chalk.green("終了します"));
     rl.close();
+  },
+
+  output(message: string, color: Color = "white") {
+    console.log(chalk[color](message), "\n");
   },
 };
 
