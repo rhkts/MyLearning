@@ -68,7 +68,6 @@ const CLI: UserIntarfase = {
   },
 
   destroy() {
-    console.log(chalk.green("終了します"));
     rl.close();
   },
 
@@ -90,6 +89,7 @@ async function testQuestion() {
   CLI.clear(); //画面をクリア
   const userInput = await CLI.input(); //入力を受け付けて返す。
   console.log(userInput);
+  console.log(CLI.outputAnswer(userInput));
   CLI.destroy(); //セッション終了
 }
 

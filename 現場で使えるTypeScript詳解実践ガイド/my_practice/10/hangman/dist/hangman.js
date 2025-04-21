@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const question_test_json_1 = __importDefault(require("./data/question.test.json"));
 const promises_1 = __importDefault(require("readline/promises"));
 const chalk_1 = __importDefault(require("chalk"));
+const figlet_1 = __importDefault(require("figlet"));
 console.log("Game Start!");
 class Quiz {
     questions;
@@ -49,6 +50,14 @@ const CLI = {
         console.log(chalk_1.default.green("終了します"));
         rl.close();
     },
+    //色付きでメッセージを表示
+    output(message, color = "white") {
+        console.log(chalk_1.default[color](message), "\n");
+    },
+    //文字をアスキーアートで表示
+    outputAnswer(message) {
+        console.log(figlet_1.default.textSync(message, { font: "Big" }), "\n");
+    },
 };
 console.log(quiz.getNext());
 //動作確認用
@@ -56,6 +65,7 @@ async function testQuestion() {
     CLI.clear(); //画面をクリア
     const userInput = await CLI.input(); //入力を受け付けて返す。
     console.log(userInput);
+    console.log(CLI.outputAnswer(userInput));
     CLI.destroy(); //セッション終了
 }
 testQuestion();
