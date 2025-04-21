@@ -1,6 +1,7 @@
 import rawData from "./data/question.test.json";
 import readlinePromise from "readline/promises";
 import chalk from "chalk";
+import figlet from "figlet";
 
 console.log("Game Start!");
 
@@ -14,7 +15,7 @@ interface UserIntarfase {
   clear(): void;
   destroy(): void;
   output(message: string, color?: Color): void;
-  // outputAnswer(message: string): void;
+  outputAnswer(message: string): void;
 }
 
 type Color = "red" | "green" | "yellow" | "white";
@@ -71,8 +72,14 @@ const CLI: UserIntarfase = {
     rl.close();
   },
 
+  //色付きでメッセージを表示
   output(message: string, color: Color = "white") {
     console.log(chalk[color](message), "\n");
+  },
+
+  //文字をアスキーアートで表示
+  outputAnswer(message: string) {
+    console.log(figlet.textSync(message, { font: "Big" }), "\n");
   },
 };
 
