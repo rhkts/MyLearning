@@ -30,8 +30,17 @@ class Quiz {
         return this.questions.length;
     }
 }
-const questions = question_test_json_1.default;
-const quiz = new Quiz(questions);
+class Stage {
+    answer; //解答の状態
+    leftAttempt = 5; //施工回数
+    question; //出題中の問題
+    constructor(question) {
+        this.question = question;
+        //answerにブランクの文字列を設定
+        this.answer = new Array(question.word.length).fill("_").join("");
+        console.log(this.answer);
+    }
+}
 //readlinePromisesインターフェイスのインスタンス(実体)を生成
 const rl = promises_1.default.createInterface({
     input: process.stdin,
@@ -47,7 +56,6 @@ const CLI = {
         console.clear();
     },
     destroy() {
-        console.log(chalk_1.default.green("終了します"));
         rl.close();
     },
     //色付きでメッセージを表示
@@ -59,7 +67,6 @@ const CLI = {
         console.log(figlet_1.default.textSync(message, { font: "Big" }), "\n");
     },
 };
-console.log(quiz.getNext());
 //動作確認用
 async function testQuestion() {
     CLI.clear(); //画面をクリア
@@ -68,4 +75,7 @@ async function testQuestion() {
     console.log(CLI.outputAnswer(userInput));
     CLI.destroy(); //セッション終了
 }
+const questions = question_test_json_1.default;
+const testStage = new Stage(questions[0]);
 testQuestion();
+testStage;
