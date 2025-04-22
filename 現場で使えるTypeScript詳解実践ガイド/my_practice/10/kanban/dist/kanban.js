@@ -54,17 +54,29 @@ let TaskForm = (() => {
             this.element = document.querySelector("#task-form"); //非nullアサーション
             //input要素を取得
             this.titleInputEl = document.querySelector("#form-title");
-            this.descriptionInputEl = document.querySelector("form-description");
+            this.descriptionInputEl = document.querySelector("#form-description");
             //イベントリスナを設定
             this.bindEvents();
         }
+        makeNewTask() {
+            return {
+                title: this.titleInputEl.value,
+                description: this.descriptionInputEl.value,
+            };
+        }
+        crearInputs() {
+            this.titleInputEl.value = "";
+            this.descriptionInputEl.value = "";
+        }
         submitHandler(event) {
             event.preventDefault(); //ブラウザのデフォルトの動作をキャンセル
-            console.log(this.titleInputEl.value);
-            console.log(this.descriptionInputEl.value);
+            //Taskオブジェクトの生成
+            const task = this.makeNewTask();
+            console.log(task);
+            this.crearInputs();
         }
         bindEvents() {
-            this.element.addEventListener("submit", this.submitHandler.bind(this));
+            this.element.addEventListener("submit", this.submitHandler);
         }
     };
 })();
