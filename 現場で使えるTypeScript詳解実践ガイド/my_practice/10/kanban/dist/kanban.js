@@ -70,10 +70,12 @@ let TaskForm = (() => {
             this.descriptionInputEl.value = "";
         }
         submitHandler(event) {
-            event.preventDefault(); //ブラウザのデフォルトの動作をキャンセル
-            //Taskオブジェクトの生成
+            event.preventDefault();
             const task = this.makeNewTask();
-            console.log(task);
+            //新規で追加
+            //TaskItemクラスのインスタンス化
+            const item = new TaskItem("#task-item-template", task);
+            item.mount("#todo");
             this.crearInputs();
         }
         bindEvents() {
@@ -85,7 +87,95 @@ class TaskList {
     templateEl;
     element;
     taskStatus;
-    constructor(templateId, _taskStatus) { }
+    constructor(templateId, _taskStatus) {
+        //ターゲットのtemplate要素を取得
+        this.templateEl = document.querySelector(templateId);
+        //template要素のコンテンツ(子要素)を複製、tureを渡すことですべての階層でクローンする
+        const clone = this.templateEl.content.cloneNode(true);
+        //クローンした子要素から１つ目を取得
+        this.element = clone.firstElementChild;
+        console.log("---");
+        console.log(this.element);
+        //taskStatusプロパティを初期化
+        this.taskStatus = _taskStatus;
+        this.setup();
+    }
+    mount(selector) {
+        const targetEl = document.querySelector(selector);
+        targetEl.insertAdjacentElement("beforeend", this.element);
+    }
+    //クローンした要素に情報を追加
+    setup() {
+        //カラムに表示する、タスクの進捗状況を示すラベルを設定
+        this.element.querySelector("h2").textContent = `${this.taskStatus}`;
+        //ul要素にid属性を設定
+        this.element.querySelector("ul").id = `${this.taskStatus}`;
+    }
 }
+function isTaskStatus(value) {
+    return TASK_STATUS.includes(value);
+}
+let TaskItem = (() => {
+    let _instanceExtraInitializers = [];
+    let _clickHandler_decorators;
+    return class TaskItem {
+        static {
+            const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+            _clickHandler_decorators = [bound];
+            __esDecorate(this, null, _clickHandler_decorators, { kind: "method", name: "clickHandler", static: false, private: false, access: { has: obj => "clickHandler" in obj, get: obj => obj.clickHandler }, metadata: _metadata }, null, _instanceExtraInitializers);
+            if (_metadata) Object.defineProperty(this, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        }
+        templateEL = (__runInitializers(this, _instanceExtraInitializers), void 0);
+        element;
+        task;
+        constructor(templateId, _task) {
+            this.templateEL = document.querySelector(templateId);
+            const clone = this.templateEL.content.cloneNode(true);
+            this.element = clone.firstElementChild;
+            //taskプロパティを初期化
+            this.task = _task;
+            this.setup();
+            this.bindEvents();
+        }
+        mount(selector) {
+            const targetEl = document.querySelector(selector);
+            targetEl.insertAdjacentElement("beforeend", this.element);
+        }
+        setup() {
+            //挿入した要素の子要素のリストにidを設定
+            this.element.querySelector("h2").textContent = `${this.task.title}`;
+            this.element.querySelector("p").textContent = `${this.task.description}`;
+        }
+        clickHandler() {
+            if (!this.element.parentElement)
+                return;
+            //1.自信が所属しているul要素のidを見に行く
+            const currentListId = this.element.parentElement.id;
+            const taskStatusIdx = TASK_STATUS.indexOf(currentListId);
+            //idがTASK_STATUSに見つからないとき
+            if (taskStatusIdx === -1) {
+                throw new Error(`タスクステータスが不正です`);
+            }
+            //idによって隣カラムのidを決定
+            const nextListId = TASK_STATUS[taskStatusIdx + 1];
+            if (nextListId) {
+                // 隣カラムのidにli要素を挿入
+                const nextListEl = document.getElementById(nextListId);
+                nextListEl.appendChild(this.element);
+                return;
+            }
+            //もし現在のリストが"done"なら要素を削除して終了
+            this.element.remove();
+        }
+        bindEvents() {
+            //nextボタンtaskの状態を変化させる
+            this.element.addEventListener("click", this.clickHandler);
+        }
+    };
+})();
 // 入力フォームの生成
 new TaskForm();
+TASK_STATUS.forEach((status) => {
+    const list = new TaskList("#task-list-template", status);
+    list.mount("#container");
+});
