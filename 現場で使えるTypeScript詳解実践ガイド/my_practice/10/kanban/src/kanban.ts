@@ -4,6 +4,9 @@ console.log("自動読み込みできてる？？_" + nowDate);
 
 import { bound } from "./decorator/bindThis.js";
 
+const TASK_STATUS = ["todo", "working", "done"];
+type taskStatus = (typeof TASK_STATUS)[number];
+
 interface Task {
   title: string;
   description?: string;
@@ -54,4 +57,13 @@ class TaskForm {
   }
 }
 
+class TaskList {
+  templateEl: HTMLTemplateElement;
+  element: HTMLDivElement;
+  private taskStatus: TaskStatus;
+
+  constructor(templateId: string, _taskStatus: TaskStatus) {}
+}
+
+// 入力フォームの生成
 new TaskForm();

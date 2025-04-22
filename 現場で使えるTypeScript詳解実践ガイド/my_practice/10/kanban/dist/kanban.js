@@ -36,6 +36,7 @@ console.log("コンパイルと読み込み成功！");
 const nowDate = new Date();
 console.log("自動読み込みできてる？？_" + nowDate);
 import { bound } from "./decorator/bindThis.js";
+const TASK_STATUS = ["todo", "working", "done"];
 let TaskForm = (() => {
     let _instanceExtraInitializers = [];
     let _submitHandler_decorators;
@@ -80,4 +81,11 @@ let TaskForm = (() => {
         }
     };
 })();
+class TaskList {
+    templateEl;
+    element;
+    taskStatus;
+    constructor(templateId, _taskStatus) { }
+}
+// 入力フォームの生成
 new TaskForm();
