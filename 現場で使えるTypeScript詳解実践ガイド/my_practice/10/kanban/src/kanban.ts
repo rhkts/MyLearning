@@ -1,3 +1,4 @@
+const nowDate = new Date();
 console.log("自動読み込みできてる？？_" + nowDate);
 
 import { bound } from "./decorator/bindThis.js";
