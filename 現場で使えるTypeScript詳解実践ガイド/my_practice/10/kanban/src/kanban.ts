@@ -1,5 +1,3 @@
-console.log("コンパイルと読み込み成功！");
-const nowDate = new Date();
 console.log("自動読み込みできてる？？_" + nowDate);
 
 import { bound } from "./decorator/bindThis.js";
@@ -74,8 +72,6 @@ class TaskList {
 
     //クローンした子要素から１つ目を取得
     this.element = clone.firstElementChild as HTMLDivElement;
-    console.log("---");
-    console.log(this.element);
     //taskStatusプロパティを初期化
     this.taskStatus = _taskStatus;
 

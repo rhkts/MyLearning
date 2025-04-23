@@ -32,8 +32,6 @@ var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, 
     if (target) Object.defineProperty(target, contextIn.name, descriptor);
     done = true;
 };
-console.log("コンパイルと読み込み成功！");
-const nowDate = new Date();
 console.log("自動読み込みできてる？？_" + nowDate);
 import { bound } from "./decorator/bindThis.js";
 const TASK_STATUS = ["todo", "working", "done"];
@@ -94,8 +92,6 @@ class TaskList {
         const clone = this.templateEl.content.cloneNode(true);
         //クローンした子要素から１つ目を取得
         this.element = clone.firstElementChild;
-        console.log("---");
-        console.log(this.element);
         //taskStatusプロパティを初期化
         this.taskStatus = _taskStatus;
         this.setup();
