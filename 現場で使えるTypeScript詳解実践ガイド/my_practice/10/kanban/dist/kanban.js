@@ -73,7 +73,7 @@ let TaskForm = (() => {
             const task = this.makeNewTask();
             //新規で追加
             //TaskItemクラスのインスタンス化
-            const item = new TaskItem("#task-item-template", task);
+            const item = new TaskItem(task);
             item.mount("#todo");
             this.crearInputs();
         }
@@ -82,24 +82,27 @@ let TaskForm = (() => {
         }
     };
 })();
-class TaskList {
-    templateEl;
+class UIComponent {
+    templateEL;
     element;
-    taskStatus;
-    constructor(templateId, _taskStatus) {
-        //ターゲットのtemplate要素を取得
-        this.templateEl = document.querySelector(templateId);
-        //template要素のコンテンツ(子要素)を複製、tureを渡すことですべての階層でクローンする
-        const clone = this.templateEl.content.cloneNode(true);
-        //クローンした子要素から１つ目を取得
+    constructor(templateId) {
+        //template要素の取得とクローン
+        this.templateEL = document.querySelector(templateId);
+        const clone = this.templateEL.content.cloneNode(true);
         this.element = clone.firstElementChild;
-        //taskStatusプロパティを初期化
-        this.taskStatus = _taskStatus;
-        this.setup();
     }
+    //クローンした要素をホスト要素にマウントする機能
     mount(selector) {
         const targetEl = document.querySelector(selector);
         targetEl.insertAdjacentElement("beforeend", this.element);
+    }
+}
+class TaskList extends UIComponent {
+    taskStatus;
+    constructor(taskStatus) {
+        super("#task-list-template");
+        this.taskStatus = taskStatus;
+        this.setup();
     }
     //クローンした要素に情報を追加
     setup() {
@@ -113,30 +116,22 @@ function isTaskStatus(value) {
     return TASK_STATUS.includes(value);
 }
 let TaskItem = (() => {
+    let _classSuper = UIComponent;
     let _instanceExtraInitializers = [];
     let _clickHandler_decorators;
-    return class TaskItem {
+    return class TaskItem extends _classSuper {
         static {
-            const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+            const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(_classSuper[Symbol.metadata] ?? null) : void 0;
             _clickHandler_decorators = [bound];
             __esDecorate(this, null, _clickHandler_decorators, { kind: "method", name: "clickHandler", static: false, private: false, access: { has: obj => "clickHandler" in obj, get: obj => obj.clickHandler }, metadata: _metadata }, null, _instanceExtraInitializers);
             if (_metadata) Object.defineProperty(this, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
         }
-        templateEL = (__runInitializers(this, _instanceExtraInitializers), void 0);
-        element;
-        task;
-        constructor(templateId, _task) {
-            this.templateEL = document.querySelector(templateId);
-            const clone = this.templateEL.content.cloneNode(true);
-            this.element = clone.firstElementChild;
-            //taskプロパティを初期化
+        task = (__runInitializers(this, _instanceExtraInitializers), void 0);
+        constructor(_task) {
+            super("#task-item-template");
             this.task = _task;
             this.setup();
             this.bindEvents();
-        }
-        mount(selector) {
-            const targetEl = document.querySelector(selector);
-            targetEl.insertAdjacentElement("beforeend", this.element);
         }
         setup() {
             //挿入した要素の子要素のリストにidを設定
@@ -173,6 +168,6 @@ let TaskItem = (() => {
 // 入力フォームの生成
 new TaskForm();
 TASK_STATUS.forEach((status) => {
-    const list = new TaskList("#task-list-template", status);
+    const list = new TaskList(status);
     list.mount("#container");
 });

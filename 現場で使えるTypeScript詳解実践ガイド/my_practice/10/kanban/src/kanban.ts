@@ -3,6 +3,12 @@ console.log("自動読み込みできてる？？_" + nowDate);
 
 import { bound } from "./decorator/bindThis.js";
 
+interface ClickableElement {
+  element: HTMLElement;
+  clickHandler(event: MouseEvent): void;
+  bindEvents(): void;
+}
+
 const TASK_STATUS = ["todo", "working", "done"] as const;
 type TaskStatus = (typeof TASK_STATUS)[number];
 
@@ -48,7 +54,7 @@ class TaskForm {
 
     //新規で追加
     //TaskItemクラスのインスタンス化
-    const item = new TaskItem("#task-item-template", task);
+    const item = new TaskItem(task);
     item.mount("#todo");
 
     this.crearInputs();
@@ -59,29 +65,33 @@ class TaskForm {
   }
 }
 
-class TaskList {
-  templateEl: HTMLTemplateElement;
-  element: HTMLDivElement;
-  private taskStatus: TaskStatus;
+abstract class UIComponent<T extends HTMLElement> {
+  templateEL: HTMLTemplateElement;
+  element: T;
 
-  constructor(templateId: string, _taskStatus: TaskStatus) {
-    //ターゲットのtemplate要素を取得
-    this.templateEl = document.querySelector(templateId)!;
+  constructor(templateId: string) {
+    //template要素の取得とクローン
+    this.templateEL = document.querySelector(templateId)!;
 
-    //template要素のコンテンツ(子要素)を複製、tureを渡すことですべての階層でクローンする
-    const clone = this.templateEl.content.cloneNode(true) as DocumentFragment;
+    const clone = this.templateEL.content.cloneNode(true) as DocumentFragment;
 
-    //クローンした子要素から１つ目を取得
-    this.element = clone.firstElementChild as HTMLDivElement;
-    //taskStatusプロパティを初期化
-    this.taskStatus = _taskStatus;
-
-    this.setup();
+    this.element = clone.firstElementChild as T;
   }
 
+  //クローンした要素をホスト要素にマウントする機能
   mount(selector: string) {
     const targetEl = document.querySelector(selector)!;
     targetEl.insertAdjacentElement("beforeend", this.element);
+  }
+
+  //クローンした要素にデータを追加する機能
+  abstract setup(): void;
+}
+
+class TaskList extends UIComponent<HTMLDivElement> {
+  constructor(private taskStatus: TaskStatus) {
+    super("#task-list-template");
+    this.setup();
   }
 
   //クローンした要素に情報を追加
@@ -97,27 +107,15 @@ function isTaskStatus(value: any): value is TaskStatus {
   return TASK_STATUS.includes(value);
 }
 
-class TaskItem {
-  templateEL: HTMLTemplateElement;
-  element: HTMLLIElement;
+class TaskItem extends UIComponent<HTMLElement> implements ClickableElement {
   task: Task;
 
-  constructor(templateId: string, _task: Task) {
-    this.templateEL = document.querySelector(templateId)!;
-    const clone = this.templateEL.content.cloneNode(true) as DocumentFragment;
-    this.element = clone.firstElementChild as HTMLLIElement;
+  constructor(_task: Task) {
+    super("#task-item-template");
 
-    //taskプロパティを初期化
     this.task = _task;
-
     this.setup();
-
     this.bindEvents();
-  }
-
-  mount(selector: string) {
-    const targetEl = document.querySelector(selector)!;
-    targetEl.insertAdjacentElement("beforeend", this.element);
   }
 
   setup() {
@@ -167,6 +165,6 @@ class TaskItem {
 new TaskForm();
 
 TASK_STATUS.forEach((status) => {
-  const list = new TaskList("#task-list-template", status);
+  const list = new TaskList(status);
   list.mount("#container");
 });
