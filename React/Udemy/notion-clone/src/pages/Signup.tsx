@@ -1,10 +1,13 @@
 import { authRepository } from "@/modules/auth/auth.repositpry";
+import { useCurrentUserStore } from "@/modules/auth/current-user.state";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const currentUserStore = useCurrentUserStore();
 
   const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -21,7 +24,10 @@ function Signup() {
   const signup = async () => {
     const user = await authRepository.signup(name, email, password);
     console.log(user);
+    currentUserStore.set(user);
   };
+
+  if (currentUserStore != null) return <Navigate to="/" replace />;
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 sm:px-6 lg:px-8">

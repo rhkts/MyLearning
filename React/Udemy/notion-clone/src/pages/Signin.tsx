@@ -1,10 +1,12 @@
 import { authRepository } from "@/modules/auth/auth.repositpry";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useCurrentUserStore } from "@/modules/auth/current-user.state";
+import { use, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 
 function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const currentUSerStore = useCurrentUserStore();
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -17,7 +19,11 @@ function Signin() {
   const signin = async () => {
     const user = await authRepository.signin(email, password);
     console.log(user);
+    //Jotaiにログインした状態をセット
+    currentUSerStore.set(user);
   };
+
+  if (currentUSerStore.currentUser !== null) return <Navigate to="/" replace />;
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 sm:px-6 lg:px-8">
