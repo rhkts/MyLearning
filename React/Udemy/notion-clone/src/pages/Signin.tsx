@@ -23,7 +23,7 @@ function Signin() {
     currentUSerStore.set(user);
   };
 
-  if (currentUSerStore.currentUser !== null) return <Navigate to="/" replace />;
+  if (currentUSerStore.currentUser != null) return <Navigate to="/" replace />;
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 sm:px-6 lg:px-8">
