@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Signin() {
   return (
@@ -53,7 +53,7 @@ function Signin() {
               </div>
               <div className="mt-4 text-center text-sm">
                 登録は
-                <Link className="underline" to={'/signup'}>
+                <Link className="underline" to={"/signup"}>
                   こちら
                 </Link>
                 から
