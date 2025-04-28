@@ -1,5 +1,5 @@
 import { authRepository } from "@/modules/auth/auth.repositpry";
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 
 function Signup() {
   const [name, setName] = useState("");
