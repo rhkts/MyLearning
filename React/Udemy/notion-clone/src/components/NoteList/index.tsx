@@ -3,6 +3,7 @@ import { NoteItem } from "./NoteItem";
 import { useNoteStore } from "@/modules/notes/note.state";
 import { useCurrentUserStore } from "@/modules/auth/current-user.state";
 import { noteRepository } from "@/modules/notes/note.repository";
+import { Note } from "@/modules/notes/note.entity";
 
 interface NoteListProps {
   layer?: number;
@@ -21,6 +22,14 @@ export function NoteList({ layer = 0, parentId }: NoteListProps) {
     noteStore.set([newNote]);
   };
 
+  const fetchChildren = async (event: React.MouseEvent, note: Note) => {
+    event.stopPropagation();
+    const chilren = await noteRepository.find(currentUser!.id, note.id);
+    if (chilren == null) return;
+
+    noteStore.set(chilren);
+  };
+
   return (
     <>
       <p
@@ -32,17 +41,23 @@ export function NoteList({ layer = 0, parentId }: NoteListProps) {
       >
         ページがありません
       </p>
-      {notes.map((note) => {
-        return (
-          <div key={note.id}>
-            <NoteItem
-              note={note}
-              layer={layer}
-              onCreate={(event) => createChild(event, note.id)}
-            />
-          </div>
-        );
-      })}
+      {notes
+        .filter((note) => note.parent_document == parentId)
+        .map((note) => {
+          return (
+            <div key={note.id}>
+              <NoteItem
+                note={note}
+                layer={layer}
+                onExpand={(event: React.MouseEvent) =>
+                  fetchChildren(event, note)
+                }
+                onCreate={(event) => createChild(event, note.id)}
+              />
+              <NoteList layer={layer + 1} parentId={note.id} />
+            </div>
+          );
+        })}
     </>
   );
 }
