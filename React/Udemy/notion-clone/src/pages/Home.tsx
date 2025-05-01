@@ -1,12 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCurrentUserStore } from "@/modules/auth/current-user.state";
 import { noteRepository } from "@/modules/notes/note.repository";
+import { useNoteStore } from "@/modules/notes/note.state";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 
 export function Home() {
   const [title, setTitle] = useState("");
   const { currentUser } = useCurrentUserStore();
+  const noteStore = useNoteStore();
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -14,9 +16,10 @@ export function Home() {
 
   const createNote = async () => {
     const newNote = await noteRepository.create(currentUser!.id, { title });
-    setTitle("");
 
-    console.log(newNote);
+    noteStore.set([newNote]);
+
+    setTitle("");
   };
 
   return (

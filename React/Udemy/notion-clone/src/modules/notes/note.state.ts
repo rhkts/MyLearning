@@ -5,7 +5,7 @@ import { Note } from "./note.entity";
 const noteAtom = atom<Note[]>([]);
 
 //atomを操作するフックを用意
-export const usetNoteStore = () => {
+export const useNoteStore = () => {
   const [note, setNote] = useAtom(noteAtom);
 
   const set = (newNotes: Note[]) => {
