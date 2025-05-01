@@ -5,6 +5,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import {
+  ChevronDown,
   ChevronRight,
   FileIcon,
   MoreHorizontal,
@@ -41,7 +42,7 @@ export function NoteItem({
   const [isHoverd, setIsHoverd] = useState(false);
 
   const getIcon = () => {
-    return isHoverd ? ChevronRight : FileIcon;
+    return expanded ? ChevronDown : isHoverd ? ChevronRight : FileIcon;
   };
 
   const menu = (

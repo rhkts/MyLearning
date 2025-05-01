@@ -4,6 +4,7 @@ import { useNoteStore } from "@/modules/notes/note.state";
 import { useCurrentUserStore } from "@/modules/auth/current-user.state";
 import { noteRepository } from "@/modules/notes/note.repository";
 import { Note } from "@/modules/notes/note.entity";
+import { useState } from "react";
 
 interface NoteListProps {
   layer?: number;
@@ -14,11 +15,12 @@ export function NoteList({ layer = 0, parentId }: NoteListProps) {
   const noteStore = useNoteStore();
   const notes = noteStore.getAll();
   const { currentUser } = useCurrentUserStore();
+  const [expanded, setExpanded] = useState<Map<number, boolean>>(new Map());
 
   const createChild = async (event: React.MouseEvent, parentId: number) => {
     event.stopPropagation();
     const newNote = await noteRepository.create(currentUser!.id, { parentId });
-
+    setExpanded((prev) => prev.set(parentId, true));
     noteStore.set([newNote]);
   };
 
@@ -28,6 +30,16 @@ export function NoteList({ layer = 0, parentId }: NoteListProps) {
     if (chilren == null) return;
 
     noteStore.set(chilren);
+
+    //アコーディオンを開く
+    //prev→現在のアコーディオンの状態(false)が入っている
+    setExpanded((prev) => {
+      const newExpanded = new Map(prev);
+
+      newExpanded.set(note.id, !prev.get(note.id));
+
+      return newExpanded;
+    });
   };
 
   return (
@@ -49,12 +61,15 @@ export function NoteList({ layer = 0, parentId }: NoteListProps) {
               <NoteItem
                 note={note}
                 layer={layer}
+                expanded={expanded.get(note.id)}
                 onExpand={(event: React.MouseEvent) =>
                   fetchChildren(event, note)
                 }
                 onCreate={(event) => createChild(event, note.id)}
               />
-              <NoteList layer={layer + 1} parentId={note.id} />
+              {expanded.get(note.id) && (
+                <NoteList layer={layer + 1} parentId={note.id} />
+              )}
             </div>
           );
         })}
