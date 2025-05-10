@@ -42,4 +42,16 @@ export const noteRepository = {
     // console.log("====");
     return data;
   },
+
+  //noteデータを取得するメソッド
+  async findNote(userId: string, id: number) {
+    const { data } = await supabase
+      .from("notes")
+      .select()
+      .eq("id", id)
+      .eq("user_id", userId)
+      .single();
+
+    return data;
+  },
 };

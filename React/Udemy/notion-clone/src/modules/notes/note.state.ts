@@ -1,12 +1,13 @@
 import { atom, useAtom } from "jotai";
 import { Note } from "./note.entity";
+import { get } from "http";
 
 //atomを用意
 const noteAtom = atom<Note[]>([]);
 
 //atomを操作するフックを用意
 export const useNoteStore = () => {
-  const [note, setNote] = useAtom(noteAtom);
+  const [notes, setNote] = useAtom(noteAtom);
 
   const set = (newNotes: Note[]) => {
     setNote((oldNotes) => {
@@ -22,8 +23,13 @@ export const useNoteStore = () => {
     });
   };
 
+  const getOne = (id: number) => {
+    return notes.find((note) => note.id == id);
+  };
+
   return {
-    getAll: () => note,
+    getAll: () => notes,
+    getOne,
     set,
   };
 };
