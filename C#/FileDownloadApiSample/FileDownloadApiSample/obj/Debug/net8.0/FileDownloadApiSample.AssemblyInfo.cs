@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FileDownloadApiSample")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11d072ded00d244fadcc9a66575468bd28bd0a1f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+88b2402bf555ab8ac442193d8f64a6782353d6a3")]
 [assembly: System.Reflection.AssemblyProductAttribute("FileDownloadApiSample")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FileDownloadApiSample")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

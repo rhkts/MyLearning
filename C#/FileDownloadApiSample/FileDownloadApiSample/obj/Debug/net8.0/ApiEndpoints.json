@@ -19,5 +19,21 @@
       }
     ],
     "EndpointName": "GetWeatherForecast"
+  },
+  {
+    "ContainingType": "FileDownloadApiSample.Controllers.WeatherForecastController",
+    "Method": "FileDownload",
+    "RelativePath": "WeatherForecast/fileDownload",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
