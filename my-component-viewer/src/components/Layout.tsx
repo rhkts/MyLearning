@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import CodeViewer from "./CodeViewer";
 import * as Mui from "./mui";
+import * as ReactHookForm from "./ReactHookForm";
 import * as TailwindCss from "./TailwindCSS";
 import * as Tools from "./Tools";
 import { ComponentType } from "./type";
-import CodeViewer from "./CodeViewer";
 
 // 各種コンポーネントのtsxファイルを取得
 const codeFiles = import.meta.glob("../components/**/*.{tsx,ts}", {
@@ -48,6 +49,12 @@ const components: ComponentType[] = [
     name: "ApiWrapper",
     component: <Tools.ApiWrapper />,
     path: "./Tools/ApiWrapper.tsx",
+  },
+  {
+    id: "ReactHookHormSampleInputs",
+    name: "ReactHookHormSampleInputs",
+    component: <ReactHookForm.ReactHookHormSampleInputs />,
+    path: "./ReactHookForm/ReactHookHormSampleInputs.tsx",
   },
   {
     id: "SummerTime",
