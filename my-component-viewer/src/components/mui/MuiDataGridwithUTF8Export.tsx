@@ -34,13 +34,13 @@ const columuns: GridColDef[] = [
 ];
 
 const rows: rowType[] = [
-  { id: 1, firstName: "太郎", lastName: "テスト", age: 35 },
-  { id: 2, firstName: "次郎", lastName: "テスト", age: 42 },
-  { id: 3, firstName: "三郎", lastName: "テスト", age: 45 },
+  { id: 1, firstName: "山田", lastName: "太郎", age: 35 },
+  { id: 2, firstName: "佐藤", lastName: "花子", age: 42 },
+  { id: 3, firstName: "鈴木", lastName: "次郎", age: 45 },
 ];
 
 function CustomToolbar() {
-  //csvOptionsプロパティに utf8WithBom: true を渡す。
+  // csvOptions の utf8WithBom を true にすることで文字化けを防ぐ
   return <GridToolbarExport csvOptions={{ utf8WithBom: true }} />;
 }
 

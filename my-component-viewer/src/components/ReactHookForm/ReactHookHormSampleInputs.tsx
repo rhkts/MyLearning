@@ -23,7 +23,7 @@ export default function ReactHookHormSampleInputs() {
     const hasChanged = hasChangedField();
 
     if (hasChanged) {
-      alert("名前以外が変更されています。");
+      alert("入力内容が変更されています。");
       return;
     }
   };
@@ -47,7 +47,7 @@ export default function ReactHookHormSampleInputs() {
                 {...register("mode", { required: "モードを選択してください" })}
                 className="h-3.5 w-3.5 accent-zinc-900"
               />
-              <span>参照</span>
+              <span>閲覧</span>
             </label>
 
             <label className="inline-flex items-center gap-2 text-sm text-zinc-800">
@@ -73,10 +73,10 @@ export default function ReactHookHormSampleInputs() {
         </div>
         <div className="space-y-2">
           <label
-            htmlFor="氏名"
+            htmlFor="name"
             className="block text-sm font-medium text-zinc-800"
           >
-            名前
+            氏名
           </label>
           <input
             id="name"
@@ -88,7 +88,9 @@ export default function ReactHookHormSampleInputs() {
           />
 
           {errors.name && (
-            <p className="mt-1 text-sm text-red-600">必須入力項目です</p>
+            <p className="mt-1 text-sm text-red-600">
+              入力値が不正です
+            </p>
           )}
         </div>
 
@@ -118,7 +120,7 @@ export default function ReactHookHormSampleInputs() {
 
         <div className="space-y-2">
           <label
-            htmlFor="メール"
+            htmlFor="mail"
             className="block text-sm font-medium text-zinc-800"
           >
             メールアドレス
@@ -133,13 +135,15 @@ export default function ReactHookHormSampleInputs() {
           />
 
           {errors.mail && (
-            <p className="mt-1 text-sm text-red-600">必須入力項目です</p>
+            <p className="mt-1 text-sm text-red-600">
+              入力値が不正です
+            </p>
           )}
         </div>
 
         <div className="space-y-2">
           <label
-            htmlFor="電話番号"
+            htmlFor="tel"
             className="block text-sm font-medium text-zinc-800"
           >
             TEL
@@ -147,14 +151,16 @@ export default function ReactHookHormSampleInputs() {
           <input
             id="tel"
             {...register("tell")}
-            placeholder="メールアドレスを入力してください"
+            placeholder="電話番号を入力してください"
             className="block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900
                        shadow-sm outline-none transition
                        focus:border-zinc-900 focus:ring-2 focus:ring-zinc-200"
           />
 
           {errors.tell && (
-            <p className="mt-1 text-sm text-red-600">必須入力項目です</p>
+            <p className="mt-1 text-sm text-red-600">
+              入力値が不正です
+            </p>
           )}
         </div>
 

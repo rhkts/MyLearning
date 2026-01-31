@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Alert from "@mui/material/Alert";
 
-//ジェネリック型を定義
+// ジェネリック型で返却データを定義
 type ApiResponse<T> = {
   status: string;
   data: T;
@@ -10,7 +10,7 @@ type ApiResponse<T> = {
 class ApiWrapper<T> {
   private response: ApiResponse<T>;
 
-  //一番最初に実行されるメソッド
+  // API のレスポンスをラップして扱う
   constructor(response: ApiResponse<T>) {
     this.response = response;
   }
@@ -32,7 +32,7 @@ const ApiWrapperComponent = () => {
   useEffect(() => {
     const mockApiResponseSuccess: ApiResponse<string> = {
       status: "success",
-      data: "ユーザー名: 太郎",
+      data: "ユーザー情報を取得しました",
     };
 
     const mockApiResponseError: ApiResponse<string> = {

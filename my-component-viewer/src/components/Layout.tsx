@@ -6,7 +6,7 @@ import * as TailwindCss from "./TailwindCSS";
 import * as Tools from "./Tools";
 import { ComponentType } from "./type";
 
-// 各種コンポーネントのtsxファイルを取得
+// 表示するコンポーネントの tsx/ts ファイルを取得
 const codeFiles = import.meta.glob("../components/**/*.{tsx,ts}", {
   query: "?raw",
   import: "default",
@@ -112,7 +112,7 @@ export default function Layout() {
 
       {/* Main Content */}
       <main className="flex-1 p-6 h-full overflow-auto">
-        <h1 className="text-2xl font-bold">コンポーネントのデモ</h1>
+        <h1 className="text-2xl font-bold">コンポーネントビュー</h1>
         <div className="mt-4">
           {selectedComponent ? (
             <div className="p-4 border rounded bg-white shadow">

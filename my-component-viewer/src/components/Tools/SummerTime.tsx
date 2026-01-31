@@ -3,28 +3,36 @@ import { useState } from "react";
 
 const SummerTime = () => {
   const nowDate = new Date();
-  const [dateValue, setDateValue] = useState<string>(nowDate.toString());
-  const SummerTime = new Date("1951/8/11");
+  const initialDate = nowDate.toISOString().slice(0, 10);
+  const [dateValue, setDateValue] = useState<string>(initialDate);
+  const summerTime = new Date("1951-08-11");
 
-  const onChangeHandller = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDateValue(event.target.value);
   };
 
-  //memo
-  //タイムゾーン付き文字列で初期化したパターンの検証を行う
+  // memo: サマータイム実施日を入力した際の表示確認用
 
   return (
     <>
-      <TextField defaultValue={"まだ途中"} fullWidth />
-      <TextField defaultValue={"現在日時"} disabled={true} fullWidth />
-      <TextField defaultValue={new Date(dateValue)} disabled={true} fullWidth />
-      <TextField defaultValue={"サマータイム"} disabled={true} fullWidth />
+      <TextField defaultValue={"現在日時"} fullWidth />
       <TextField
-        defaultValue={SummerTime.toString()}
+        defaultValue={nowDate.toString()}
         disabled={true}
         fullWidth
       />
-      <Input type="date" value={dateValue} onChange={onChangeHandller} />
+      <TextField
+        defaultValue={new Date(dateValue).toString()}
+        disabled={true}
+        fullWidth
+      />
+      <TextField defaultValue={"サマータイム"} disabled={true} fullWidth />
+      <TextField
+        defaultValue={summerTime.toString()}
+        disabled={true}
+        fullWidth
+      />
+      <Input type="date" value={dateValue} onChange={onChangeHandler} />
     </>
   );
 };

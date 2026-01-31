@@ -19,7 +19,7 @@ const MuiDialog = () => {
         <DialogTitle>ダイアログのタイトル</DialogTitle>
         <DialogContent>ダイアログの内容</DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)}>ダイアログを閉じる</Button>
+          <Button onClick={() => setOpen(false)}>閉じる</Button>
         </DialogActions>
       </Dialog>
     </>
