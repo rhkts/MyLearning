@@ -7,7 +7,7 @@ import * as Tools from "./Tools";
 import { ComponentType } from "./type";
 
 // 表示するコンポーネントの tsx/ts ファイルを取得
-const codeFiles = import.meta.glob("../components/**/*.{tsx,ts}", {
+const codeFiles = import.meta.glob("./**/*.{tsx,ts}", {
   query: "?raw",
   import: "default",
 });
