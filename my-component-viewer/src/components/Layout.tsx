@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import CodeViewer from "./CodeViewer";
-import * as Mui from "./mui";
-import * as ReactHookForm from "./ReactHookForm";
-import * as TailwindCss from "./TailwindCSS";
-import * as Tools from "./Tools";
-import { ComponentType } from "./type";
+import { categoryLogoMap, getComponentById } from "./componentRegistry";
 
 // 表示するコンポーネントの tsx/ts ファイルを取得
 const codeFiles = import.meta.glob("./**/*.{tsx,ts}", {
@@ -12,153 +9,88 @@ const codeFiles = import.meta.glob("./**/*.{tsx,ts}", {
   import: "default",
 });
 
-// コンポーネントリスト
-const components: ComponentType[] = [
-  {
-    id: "MuiButton",
-    name: "MuiButton",
-    component: <Mui.MuiButton />,
-    path: "./mui/MuiButton.tsx",
-  },
-  {
-    id: "MuiDataGridwithUTF8Export",
-    name: "MuiDataGridwithUTF8Export",
-    component: <Mui.MuiDataGridwithUTF8Export />,
-    path: "./mui/MuiDataGridwithUTF8Export.tsx",
-  },
-  {
-    id: "MuiDialog",
-    name: "MuiDialog",
-    component: <Mui.MuiDialog />,
-    path: "./mui/MuiDialog.tsx",
-  },
-  {
-    id: "Tailwindbutton",
-    name: "TailwindButton",
-    component: <TailwindCss.TailwindButton />,
-    path: "./TailwindCSS/TailwindButton.tsx",
-  },
-  {
-    id: "TailwindCard",
-    name: "TailwindCard",
-    component: <TailwindCss.TailwindCard />,
-    path: "./TailwindCSS/TailwindCard.tsx",
-  },
-  {
-    id: "ApiWrapper",
-    name: "ApiWrapper",
-    component: <Tools.ApiWrapper />,
-    path: "./Tools/ApiWrapper.tsx",
-  },
-  {
-    id: "ReactHookHormSampleInputs",
-    name: "ReactHookHormSampleInputs",
-    component: <ReactHookForm.ReactHookHormSampleInputs />,
-    path: "./ReactHookForm/ReactHookHormSampleInputs.tsx",
-  },
-  {
-    id: "SummerTime",
-    name: "SummerTime",
-    component: <Tools.SummerTime />,
-    path: "./Tools/SummerTime.tsx",
-  },
-];
-
 export default function Layout() {
-  const [selectedComponent, setSelectedComponent] = useState<string | null>(
-    null
-  );
+  const { componentId } = useParams();
+  const navigate = useNavigate();
+  const selectedComponent = componentId ? getComponentById(componentId) : undefined;
   const [activeTab, setActiveTab] = useState<"demo" | "code">("demo");
   const [sourceCode, setSourceCode] = useState<string>("");
 
   useEffect(() => {
-    if (selectedComponent) {
-      const component: ComponentType | undefined = components.find(
-        (component) => component.id === selectedComponent
-      );
-      if (component && codeFiles[component.path]) {
-        codeFiles[component.path]().then((code) => {
-          return setSourceCode(code as string);
-        });
-      }
+    if (selectedComponent && codeFiles[selectedComponent.path]) {
+      codeFiles[selectedComponent.path]().then((code) => {
+        setSourceCode(code as string);
+      });
     }
   }, [selectedComponent]);
 
-  useEffect(() => {
-    console.log(sourceCode);
-  }, [sourceCode]);
-
   return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
-      <aside className="w-64 bg-gray-800 text-white p-4 h-full overflow-auto">
-        <h2 className="text-xl font-bold mb-4">コンポーネント一覧</h2>
-        <ul>
-          {components.map((component) => (
-            <li
-              key={component.id}
-              className={`cursor-pointer p-2 rounded ${
-                selectedComponent === component.id
-                  ? "bg-blue-500"
-                  : "hover:bg-gray-600"
-              }`}
-              onClick={() => setSelectedComponent(component.id)}
-            >
-              {component.name}
-            </li>
-          ))}
-        </ul>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 p-6 h-full overflow-auto">
-        <h1 className="text-2xl font-bold">コンポーネントビュー</h1>
-        <div className="mt-4">
-          {selectedComponent ? (
-            <div className="p-4 border rounded bg-white shadow">
-              <h2 className="text-xl font-semibold mb-2">
-                {
-                  components.find(
-                    (component) => component.id === selectedComponent
-                  )?.name
-                }
-              </h2>
-
-              <div className="flex border-b mb-4">
-                <button
-                  className={`p-2 w-1/2 ${
-                    activeTab === "demo"
-                      ? "border-b-2 border-blue-500 font-bold"
-                      : "text-gray-500"
-                  }`}
-                  onClick={() => setActiveTab("demo")}
-                >
-                  デモ
-                </button>
-                <button
-                  className={`p-2 w-1/2 ${
-                    activeTab === "code"
-                      ? "border-b-2 border-blue-500 font-bold"
-                      : "text-gray-500"
-                  }`}
-                  onClick={() => setActiveTab("code")}
-                >
-                  コード
-                </button>
-              </div>
-
-              {activeTab === "demo"
-                ? components.find(
-                    (component) => component.id === selectedComponent
-                  )?.component
-                : sourceCode && <CodeViewer code={sourceCode} />}
-            </div>
-          ) : (
-            <p className="text-gray-500">
-              左のリストからコンポーネントを選択してください。
-            </p>
+    <div className="min-h-screen bg-gray-100 text-gray-900">
+      <header className="bg-gray-800 px-6 py-5 text-white shadow">
+        <button
+          type="button"
+          onClick={() => navigate("/")}
+          className="flex items-center gap-3 rounded px-2 py-1 hover:bg-gray-700"
+        >
+          {selectedComponent && (
+            <img
+              src={categoryLogoMap[selectedComponent.category]}
+              alt={`${selectedComponent.category} logo`}
+              className="h-8 w-8 object-contain"
+            />
           )}
-        </div>
+          <span className="text-xl font-bold">
+            {selectedComponent ? selectedComponent.name : "my-component-viewer"}
+          </span>
+        </button>
+      </header>
+
+      <main className="mx-auto max-w-7xl px-6 py-8">
+        {selectedComponent ? (
+          <div className="rounded-xl border border-gray-300 bg-white p-4 shadow">
+            <div className="mb-4 flex border-b">
+              <button
+                className={`w-1/2 p-2 ${
+                  activeTab === "demo"
+                    ? "border-b-2 border-blue-500 font-bold"
+                    : "text-gray-500"
+                }`}
+                onClick={() => setActiveTab("demo")}
+                type="button"
+              >
+                デモ
+              </button>
+              <button
+                className={`w-1/2 p-2 ${
+                  activeTab === "code"
+                    ? "border-b-2 border-blue-500 font-bold"
+                    : "text-gray-500"
+                }`}
+                onClick={() => setActiveTab("code")}
+                type="button"
+              >
+                コード
+              </button>
+            </div>
+
+            {activeTab === "demo"
+              ? selectedComponent.component
+              : sourceCode && <CodeViewer code={sourceCode} />}
+          </div>
+        ) : (
+          <div className="rounded-xl border border-gray-300 bg-white p-6 shadow">
+            <p className="mb-4 text-gray-600">
+              コンポーネントが見つかりませんでした。
+            </p>
+            <button
+              type="button"
+              onClick={() => navigate("/")}
+              className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+            >
+              Homeへ戻る
+            </button>
+          </div>
+        )}
       </main>
     </div>
   );
