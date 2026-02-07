@@ -3,9 +3,10 @@
 確かな力が身につくJavaScript超入門/Served-win32-x64
 確かな力が身につくJavaScript超入門/work/_template
 現場で使えるTypeScript詳解実践ガイド/ts-practice
-// 画像はコミットしない
+// 画像はコミットしない(component-viwerでは使うのでそのフォルダは除く)
 *.jpg
 *.svg
+!my-component-viewer/**/*.svg
 //_commonはコミットしない
 _common
 //.txtファイルはコミットしない
